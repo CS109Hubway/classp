@@ -1,8 +1,7 @@
-
 import pandas as pd # pandas
 import datetime
-
-
+from StringIO import StringIO
+import requests
 
 #####--------------- TRIPS -------------------#####
 
@@ -27,24 +26,24 @@ Example
 >>> read_prep_trips('https://raw.githubusercontent.com/CS109Hubway/classp/master/data/tripsthrough2012.csv')
 """
 def trips(url_trips):
-	trips = pd.read_csv(url_trips)
+	trips_df = pd.read_csv(url_trips)
 
 	#Modify Date & Time columns
 	trips_df.start_date = pd.to_datetime(trips_df.start_date)
 	trips_df.end_date = pd.to_datetime(trips_df.end_date)
-	trips=  trips_df.loc[trips_df.start_date.map(lambda t: t.year) == 2012]
-	trips['st_hour'] = trips_df.start_date.map(lambda t: t.hour)
-	trips['end_hour'] = trips_df.end_date.map(lambda t: t.hour)
-	trips['st_minute'] = trips_df.start_date.map(lambda t: t.minute)
-	trips['end_minute'] = trips_df.end_date.map(lambda t: t.minute)
+	trips_df=  trips_df.loc[trips_df.start_date.map(lambda t: t.year) == 2012]
+	trips_df['st_hour'] = trips_df.start_date.map(lambda t: t.hour)
+	trips_df['end_hour'] = trips_df.end_date.map(lambda t: t.hour)
+	trips_df['st_minute'] = trips_df.start_date.map(lambda t: t.minute)
+	trips_df['end_minute'] = trips_df.end_date.map(lambda t: t.minute)
 	trips_df.st_minute= trips_df.st_minute+60*trips_df.st_hour
 	trips_df.end_minute= trips_df.end_minute+60*trips_df.end_hour
-	trips['st_month'] = trips_df.start_date.map(lambda t: t.month)
-	trips['end_month'] = trips_df.end_date.map(lambda t: t.month)
-	trips['st_daydate'] = trips_df.start_date.map(lambda t: t.date())
-	trips['end_daydate'] = trips_df.end_date.map(lambda t: t.date())
-	trips['st_weekday'] = trips_df.st_daydate.map(lambda t: t.weekday())
-	trips['end_weekday'] = trips_df.end_daydate.map(lambda t: t.weekday())
+	trips_df['st_month'] = trips_df.start_date.map(lambda t: t.month)
+	trips_df['end_month'] = trips_df.end_date.map(lambda t: t.month)
+	trips_df['st_daydate'] = trips_df.start_date.map(lambda t: t.date())
+	trips_df['end_daydate'] = trips_df.end_date.map(lambda t: t.date())
+	trips_df['st_weekday'] = trips_df.st_daydate.map(lambda t: t.weekday())
+	trips_df['end_weekday'] = trips_df.end_daydate.map(lambda t: t.weekday())
 	trips_df.reset_index(inplace=True)
 	
 	return trips_df
@@ -126,8 +125,8 @@ def status(url1,url2,url3):
 	
 	#extract time and date fields from timestamp
 	status_df.timestamp = pd.to_datetime(status_df.timestamp)
-	status_df = status.loc[status_df.timestamp.map(lambda t: t.year) == 2012]
-	status_df = status.loc[status_df.capacity != 0]
+	status_df = status_df.loc[status_df.timestamp.map(lambda t: t.year) == 2012]
+	status_df = status_df.loc[status_df.capacity != 0]
 	status_df['hour'] =  status_df.timestamp.map(lambda t: t.hour)
 	status_df['minute'] = status_df.timestamp.map(lambda t: t.minute)
 	status_df.minute = status_df.minute+60*status.hour
