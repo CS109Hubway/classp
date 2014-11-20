@@ -7,9 +7,6 @@ Gabriel Goulet Langlois
 
 Joshua Michael Wolff
 
-Ariana Salazar Mirande
-
-
 ### Topic:
 Hubway stations bike and slot availability predicition.
 
@@ -23,3 +20,4 @@ Boston/Cambridge Weather data
 
 
 CS109 Class Project Repository. 
+
