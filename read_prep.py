@@ -129,7 +129,7 @@ def status(url1,url2,url3):
 	status_df = status_df.loc[status_df.capacity != 0]
 	status_df['hour'] =  status_df.timestamp.map(lambda t: t.hour)
 	status_df['minute'] = status_df.timestamp.map(lambda t: t.minute)
-	status_df.minute = status_df.minute+60*status.hour
+	status_df.minute = status_df.minute+60*status_df.hour
 	status_df['month'] =  status_df.timestamp.map(lambda t: t.month)
 	status_df['daydate'] = status_df.timestamp.map(lambda t: t.date())
 	status_df['weekday'] =  status_df.timestamp.map(lambda t: t.weekday())
