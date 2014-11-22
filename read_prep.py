@@ -136,6 +136,54 @@ def status(url1,url2,url3):
 	status_df.reset_index(inplace=True)
 
 	return status_df
+	
+#####--------------- STATION STATUS -------------------#####
+
+"""
+Function
+--------
+statusintervals
+	Returns a dataframe with Hubway station status data for 5/1/2012 through 9/30/2012. 
+
+Parameters
+----------
+url1 : string
+    url of first csv file
+url2 : string
+    url of second csv file
+
+Returns
+-------
+a DataFrame
+	A pandas DataFrame containing station status data for May through Sept 2012. Station status entries with capacity=0 are removed.
+
+Example
+-------
+>>> status('https://raw.githubusercontent.com/CS109Hubway/classp/master/data/interval_stationstatus_aug_sept.csv',
+	'https://raw.githubusercontent.com/CS109Hubway/classp/master/data/interval_stationstatus_may_jul.csv')
+"""
+
+def statusintervals(url1,url2):
+	#import CSVs
+	status1 = pd.read_csv(url1)
+	status2 = pd.read_csv(url2)
+	
+	#combine station status dataframes
+	status_df = pd.concat([status1,status2])
+	
+	#extract time and date fields from interv
+	status_df.interv = pd.to_datetime(status_df.interv)
+	status_df = status_df.loc[status_df.interv.map(lambda t: t.year) == 2012]
+	status_df = status_df.loc[status_df.capacity != 0]
+	status_df['hour'] =  status_df.interv.map(lambda t: t.hour)
+	status_df['minute'] = status_df.interv.map(lambda t: t.minute)
+	status_df.minute = status_df.minute+60*status_df.hour
+	status_df['month'] =  status_df.interv.map(lambda t: t.month)
+	status_df['daydate'] = status_df.interv.map(lambda t: t.date())
+	status_df['weekday'] =  status_df.interv.map(lambda t: t.weekday())
+	status_df.reset_index(inplace=True)
+
+	return status_df
 
 	
 #####--------------- STATIONS -------------------#####
