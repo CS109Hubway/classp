@@ -159,7 +159,7 @@ a DataFrame
 
 Example
 -------
->>> status('https://raw.githubusercontent.com/CS109Hubway/classp/master/data/interval_stationstatus_aug_sept.csv',
+>>> statusintervals('https://raw.githubusercontent.com/CS109Hubway/classp/master/data/interval_stationstatus_aug_sept.csv',
 	'https://raw.githubusercontent.com/CS109Hubway/classp/master/data/interval_stationstatus_may_jul.csv')
 """
 
@@ -174,7 +174,7 @@ def statusintervals(url1,url2):
 	#extract time and date fields from interv
 	status_df.interv = pd.to_datetime(status_df.interv)
 	status_df = status_df.loc[status_df.interv.map(lambda t: t.year) == 2012]
-	status_df = status_df.loc[status_df.capacity != 0]
+	status_df = status_df.loc[status_df.latest_capacity != 0]
 	status_df['hour'] =  status_df.interv.map(lambda t: t.hour)
 	status_df['minute'] = status_df.interv.map(lambda t: t.minute)
 	status_df.minute = status_df.minute+60*status_df.hour
