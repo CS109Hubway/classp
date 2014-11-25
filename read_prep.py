@@ -136,6 +136,30 @@ def status(url1,url2,url3):
 	status_df.reset_index(inplace=True)
 
 	return status_df
+	
+
+
+def statusintervals(url1,url2):
+	#import CSVs
+	status1 = pd.read_csv(url1)
+	status2 = pd.read_csv(url2)
+	
+	#combine station status dataframes
+	status_df = pd.concat([status1,status2])
+	
+	#extract time and date fields from timestamp
+	status_df.interv = pd.to_datetime(status_df.interv)
+	status_df = status_df.loc[status_df.interv.map(lambda t: t.year) == 2012]
+	status_df = status_df.loc[status_df.latest_capacity != 0]
+	status_df['hour'] =  status_df.interv.map(lambda t: t.hour)
+	status_df['minute'] = status_df.interv.map(lambda t: t.minute)
+	status_df.minute = status_df.minute+60*status_df.hour
+	status_df['month'] =  status_df.interv.map(lambda t: t.month)
+	status_df['daydate'] = status_df.interv.map(lambda t: t.date())
+	status_df['weekday'] =  status_df.interv.map(lambda t: t.weekday())
+	status_df.reset_index(inplace=True)
+
+	return status_df
 
 	
 #####--------------- STATIONS -------------------#####
