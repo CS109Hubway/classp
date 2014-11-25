@@ -136,54 +136,6 @@ def status(url1,url2,url3):
 	status_df.reset_index(inplace=True)
 
 	return status_df
-	
-#####--------------- STATION STATUS -------------------#####
-
-"""
-Function
---------
-statusintervals
-	Returns a dataframe with Hubway station status data for 5/1/2012 through 9/30/2012. 
-
-Parameters
-----------
-url1 : string
-    url of first csv file
-url2 : string
-    url of second csv file
-
-Returns
--------
-a DataFrame
-	A pandas DataFrame containing station status data for May through Sept 2012. Station status entries with capacity=0 are removed.
-
-Example
--------
->>> statusintervals('https://raw.githubusercontent.com/CS109Hubway/classp/master/data/interval_stationstatus_aug_sept.csv',
-	'https://raw.githubusercontent.com/CS109Hubway/classp/master/data/interval_stationstatus_may_jul.csv')
-"""
-
-def statusintervals(url1,url2):
-	#import CSVs
-	status1 = pd.read_csv(url1)
-	status2 = pd.read_csv(url2)
-	
-	#combine station status dataframes
-	status_df = pd.concat([status1,status2])
-	
-	#extract time and date fields from interv
-	status_df.interv = pd.to_datetime(status_df.interv)
-	status_df = status_df.loc[status_df.interv.map(lambda t: t.year) == 2012]
-	status_df = status_df.loc[status_df.latest_capacity != 0]
-	status_df['hour'] =  status_df.interv.map(lambda t: t.hour)
-	status_df['minute'] = status_df.interv.map(lambda t: t.minute)
-	status_df.minute = status_df.minute+60*status_df.hour
-	status_df['month'] =  status_df.interv.map(lambda t: t.month)
-	status_df['daydate'] = status_df.interv.map(lambda t: t.date())
-	status_df['weekday'] =  status_df.interv.map(lambda t: t.weekday())
-	status_df.reset_index(inplace=True)
-
-	return status_df
 
 	
 #####--------------- STATIONS -------------------#####
@@ -260,3 +212,47 @@ def baseball(url):
 	MLB.drop(['Durhour', 'Durmin', 'timedelta'], axis=1, inplace=True)
 
 	return MLB
+	
+	#####--------------- BASEBALL -------------------#####
+	
+"""
+Function
+--------
+basketball
+	Returns a dataframe with Celtics home games between May and Sept 2012. 
+
+Parameters
+----------
+url : string
+    url of input csv file
+
+
+Returns
+-------
+a DataFrame
+	A pandas DataFrame containing Celtic game times and durations.
+
+Example
+-------
+>>> basketball('https://raw.githubusercontent.com/CS109Hubway/classp/master/data/Celtics2012.csv')
+"""
+
+def basketball(url):
+	#read in baseball data
+	NBA = pd.read_csv(url, ', ')
+
+	#use date, year, time, and duration fields to generate start and end time stamps and drop temp fields
+	NBA['start_time']=pd.to_datetime(NBA['Date']+' '+NBA['Year'].astype(str)+ ' ' +NBA['Time'])
+	NBA['Durhour']=NBA['Duration'].apply(lambda x: x.split(':')[0]).astype(int)
+	NBA['Durmin']=NBA['Duration'].apply(lambda x: x.split(':')[1]).astype(int)
+	NBA['timedelta']=NBA['Durhour'].apply(lambda x: datetime.timedelta(hours=x))+NBA['Durmin'].apply(lambda x: datetime.timedelta(minutes=x))
+	NBA['end_time'] = NBA["start_time"]+NBA["timedelta"]
+	NBA['hour'] = NBA.start_time.map(lambda t: t.hour)
+	NBA['minute'] = NBA.start_time.map(lambda t: t.minute)
+	NBA['month'] = NBA.start_time.map(lambda t: t.month)
+	NBA['daydate'] = NBA.start_time.map(lambda t: t.date())
+	NBA['weekday'] = NBA.start_time.map(lambda t: t.weekday())
+	NBA.drop(['Durhour', 'Durmin', 'timedelta'], axis=1, inplace=True)
+	NBA= NBA.loc[NBA.month >=5]
+	
+	return NBA
