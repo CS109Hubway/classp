@@ -34,10 +34,10 @@
       <section id="main_content" class="inner">
 
 <h2><a id="cs109-class-project" class="anchor" href="#cs109-class-project" aria-hidden="true">
-<span class="octicon octicon-link"></span></a>Project Background</h2>
+<span class="octicon octicon-link"></span></a>Project Overview</h2>
 
 <h3><a id="cs109-class-project-overview" class="anchor" href="#cs109-class-project-overview" aria-hidden="true">
-<span class="octicon octicon-link"></span></a>Overview</h3>
+<span class="octicon octicon-link"></span></a>Motivations</h3>
 
 <!-- 
 <h3>
@@ -78,6 +78,23 @@ style of algorithm might fail to produce solidly dependable results. Ultimately,
 What are the strengths and weaknesses of each of our algorithm designs, and how do they point toward a future ensemble 
 prediction method?</p>
 
+<h3>
+<a id="cs109-class-project-approach" class="anchor" href="#cs109-class-project-objectives" aria-hidden="true">
+<span class="octicon octicon-link"></span></a>Approach</h3>
+
+<p>Hubway ridership trends depend upon time of day, time of year, commute patterns, weather, and events such as sports.
+We began our study by scraping relevant datasets from the Hubway website as well as websites detailing weather and 
+sports event histories for Boston during 2012. We then performed a series of small exploratory data analyses with the
+hope of understanding how different variables were associated with one another. These explorations revealed important
+patterns about Hubway ridership on weekdays vs. weekends, in good weather vs. bad weather, and before and after 
+baseball games. We also incorporated mapping and clustering operations into our exploratory phase: we used simple 
+techniques to identify how location affects station ridership and more complicated techniques such as singular value 
+decomposition to group stations according to temporal use patterns and map them geographically. The information 
+collected during the exploration phase informed the creation of three predictive algorithms: one using random forest
+classification, another using bayesian inference, and third using multiple regression. For each method, we used a test set of data to 
+determine how well the algorithm performed, in terms of an accuracy measure called recall, against a baseline model
+that predicted future station status based entirely on station status 15 minutes previously.</p>
+ 
       </section>
     </div>
 
