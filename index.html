@@ -123,9 +123,23 @@ bikes, running out of return docks. The resulting disparities cause shortages fo
 for our study. The bar charts and maps below identify the stations most often empty or full during the weekday morning
  and evening rush hours. </p>
 <img src="images/ArrivalsDepartures.png" alt="arrdept">
-
-<p></p>
 <img src="images/AMFull.png" alt="amfull">
+<img src="images/AMEmpty.png" alt="amempty">
+<img src="images/PMFull.png" alt="pmfull">
+<img src="images/PMEmpty.png" alt="pmempty">
+
+<p>We used a combingation of singular value decomposition and k-means to identify groups of stations with similar 
+usage patterns. For each station, we compute the average value of fullness for every 5-minute interval on weekdays 
+and use this result as a feature vector for the clustering process. A fullness of 1 during a given interval indicates 
+that a station tends to be totally full during that interval on an average weekday. In the heatmap below, each line 
+represents the fullness profile of a single station over the course of a weekday and stations are grouped according to
+ cluster membership. The heat map and geographic map below illustrate the results of our clustering effort and clearly
+ differentiate between stations primarily serving commuters (clusters 1 and 2) and stations used for mutiple purposes 
+ (clusters 3 and 4). Stations in cluster 1 tend to be located in residential areas, explaining why they are mostly 
+ full in the morning and evening and empty during the working day. In contrast, stations in cluster 2 tend to be full 
+ mosty during midday and empty in the morning and evening. Stations in clusters 3 and 4 tend to line in the periphery 
+ of zones covered by clusters 1 and 2. </p>
+<img src="images/Clustering.png" alt="cluster">
 
 <p></p>
 
