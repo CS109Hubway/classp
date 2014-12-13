@@ -50,26 +50,21 @@
 <a id="team-members" class="anchor" href="#team-members" aria-hidden="true"><span class="octicon octicon-link">
 </span></a>Team members:</h3>
 -->
-<p>A major challenge for bicycle sharing programs like Hubway is redistribution of resources across the transportation 
-network. Certain bicycle stations are chronically empty at certain times of the day, while others are often full, 
-forcing riders to find another, more inconvenient station at which to drop off the bike. This element of uncertainty 
-detracts from the otherwise seamless user experience. To partially remedy this problem, Hubway uses vans to redistribute
+<p>A major challenge for bicycle sharing programs like Hubway is network imbalance. Some stations are chronically 
+empty at certain times of the day, while others are often full, forcing riders to find another, more inconvenient 
+station at which to drop off the bike. This element of uncertainty detracts from the otherwise seamless user 
+experience. To partially remedy this problem, Hubway uses vans to redistribute
 the bikes across stations each day. However, this strategy is ad hoc and haphazard. It adds to company costs and 
 moreover detracts from the environmental benefits that Hubway offers. This problem calls for a more scientific 
 approach to both the redistribution of bikes across stations and the provision of information to customers. We propose
 a new data science program that informs customers of the likelihood that either a bicycle or an empty bike dock will 
-be available at a given station at some future point in time. This will help improve user experience for customers 
-and inform distribution efforts for the Hubway team.</p>
+be available at a given station at some future point in time.</p>
 
 <h3>
 <a id="cs109-class-project-objectives" class="anchor" href="#cs109-class-project-objectives" aria-hidden="true">
 <span class="octicon octicon-link"></span></a>Objectives</h3>
 
-<p>Our study began with a single broad question: what will each Hubway station look like during a given 15 minute 
-interval sometime in the future? It is the nature of data science to force scientists to rethink their questions, and
-we quickly realized that our initial question was overly broad, difficult to answer, and perhaps not even useful for 
-riders. As the project continued, the questions evolved. Eventually, four primary questions emerged to drive our 
-analysis:</p>
+<p>Through this project, we sought to answer four primary questions:</p>
 <ul>
   <li>How do environmental variables affect the future state of Hubway stations?</li>
   <li>What do usage patterns look like with respect to specific stations and how that translates to imbalances in the
@@ -79,25 +74,19 @@ analysis:</p>
   <li>What form should that algorithm take?</li>
 </ul>
 
-<p>This last question shifted late in the project, however, when the results of our analysis indicated that a single 
-style of algorithm might fail to produce solidly dependable results. Ultimately, we concluded the project by asking: 
-What are the strengths and weaknesses of each of our algorithm designs, and how do they point toward a future ensemble 
-prediction method?</p>
-
 <h3>
 <a id="cs109-class-project-approach" class="anchor" href="#cs109-class-project-objectives" aria-hidden="true">
 <span class="octicon octicon-link"></span></a>Approach</h3>
 
-<p>Hubway ridership trends depend upon time of day, time of year, commute patterns, weather, and events such as sports.
-We began our study by scraping relevant datasets from the Hubway website as well as websites detailing weather and 
-sports event histories for Boston during 2012. We then performed a series of small exploratory data analyses with the
+<p>We began our study by scraping relevant datasets from the Hubway website as well as websites detailing weather and 
+sports event histories for Boston during 2012. We then performed a series of exploratory analyses with the
 hope of understanding how different variables were associated with one another. These explorations revealed important
 patterns about Hubway ridership on weekdays vs. weekends, in good weather vs. bad weather, and before and after 
 baseball games. We also incorporated mapping and clustering operations into our exploratory phase: we used simple 
 techniques to identify how location affects station ridership and more complicated techniques such as singular value 
 decomposition to group stations according to temporal use patterns and map them geographically. The information 
 collected during the exploration phase informed the creation of three predictive algorithms: one using random forest
-classification, another using bayesian inference, and third using multiple regression.</p>
+classification, another using Bayesian inference, and third using multiple regression.</p>
 
 <h2><a id="analysis" class="anchor" href="#cs109-class-project-analysis" aria-hidden="true">
 <span class="octicon octicon-link"></span></a>Analysis</h2>
