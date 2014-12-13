@@ -18,8 +18,8 @@
 
           <h1 id="project_title">Predicting Hubway Stations Status</h1>
           <h3 id="project_tagline">Lauren Alexander, Gabriel Goulet-Langlois, Joshua Wolff</h3>
-		  
-		  	  <a href="http://cs109hubway.github.io/classp#overview">Overview</a>
+		  <a href="http://cs109hubway.github.io/classp#video">Video</a>
+	  &emsp; &emsp; &emsp; &emsp; <a href="http://cs109hubway.github.io/classp#overview">Overview</a>
 	  &emsp; &emsp; &emsp; &emsp; <a href="http://cs109hubway.github.io/classp#analysis">Analysis</a>
 	  &emsp; &emsp; &emsp; &emsp; <a href="http://cs109hubway.github.io/classp#prediction">Prediction</a>
 
@@ -36,7 +36,7 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 	  
-<iframe width="560" height="315" src="//www.youtube.com/embed/2wK8jpNMjXI" frameborder="0" allowfullscreen></iframe>
+<iframe id="video" width="560" height="315" src="//www.youtube.com/embed/2wK8jpNMjXI" frameborder="0" allowfullscreen></iframe>
 
 
 <h2><a id="overview" class="anchor" href="#cs109-class-project-overview" aria-hidden="true">
@@ -153,11 +153,26 @@ regression (green line) depicts ridership as a function of temperature. Ridershi
 
 <p>This plot shows how the number of Hubway trips leaving the stations near Fenway spikes on nights with Red Sox 
 games. Go Sox!</p>
-<img src="images/baseball.png" alt="baseball">
+<img src="images/Baseball.png" alt="baseball">
+
 
 <h2><a id="prediction" class="anchor" href="#cs109-class-project-prediction" aria-hidden="true">
 <span class="octicon octicon-link"></span></a>Prediction</h2>
+
+<p>Right now, Hubway users can’t really predict whether a station will be empty or full in thirty minutes. The best 
+they can do is check to see whether a station is currently empty or full and then assume that it will look the same in
+ the near future. We set out to change that by constructing truly predictive models. To assess the accuracy of our 
+ models, we had to first construct a “baseline” to compare our results against. The first chart below shows the 
+ prediction accuracy of the baseline model. This model simulates the best possible results possible using real time 
+ data. </p>
+ <img src="images/Baseline.png" alt="baseline">
  
+ <p>Our predictive models take weather and events into account and use more advanced data science techniques such 
+ as bayesian inference, random forest classification, and regression analysis. The plots below shows the 
+ results of our predictive models compared against the baseline model. Accuracy here is gauged in terms of “recall,” 
+ which asks, “Of all the stations that ended up being empty or full, how many did the model identify correctly?"</p>
+ <img src="images/EmptyRecall.png" alt="empty">
+ <img src="images/FullRecall.png" alt="full">
       </section>
     </div>
 
